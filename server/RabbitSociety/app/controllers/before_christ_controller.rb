@@ -14,7 +14,7 @@ class BeforeChristController < ApplicationController
 		# Hardware model 4 == V2 model
 		@hardware = params[:h]
 
-		send_file '/Users/segabor/Workspace/RabbitSociety/public/bc-nominal-h4.bin', :type => 'application/octet-stream'
+		send_file Rails.public_path+'/bc-nominal-h4.bin', :type => 'application/octet-stream'
 	end
 
 
