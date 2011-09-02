@@ -1,0 +1,20 @@
+What is this
+============
+
+My Nabaztag is sad as Violet has shut down their service. So I decided to do something to make it happy again.
+This repo is a collection of various apps and tools to provide local services for Nabaztag bunnies.
+
+
+Tools
+=====
+
+* RabbitSociety - A Ruby on Rails app providing web service for the bunnies.
+* flamontagne-fleebie_weather-tip - experimental XMPP client based on this article http://www.rubyfleebie.com/xmpp4r-a-real-world-example/
+
+* openfire - Jabber server. Grab it from here: http://www.igniterealtime.org/projects/openfire/
+
+
+Status
+======
+
+Actually bunny boots up but fails logging in (there's no service to authenticate yet).
