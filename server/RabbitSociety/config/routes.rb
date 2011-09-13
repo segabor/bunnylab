@@ -2,6 +2,11 @@ RabbitSociety::Application.routes.draw do
 	match 'vl/bc.jsp' => 'before_christ#index'
 	match 'vl/locate.jsp' => 'before_christ#locate'
 	match 'vl/sendMailXMPP.jsp' => 'before_christ#sendMailXMPP'
+	
+	# Events
+	match 'vl/record.jsp' => 'rabbit_events#record'
+	match 'vl/p4.jsp' => 'rabbit_events#ping'
+	match 'vl/rfid.jsp' => 'rabbit_events#rfid'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,2 @@
+module RabbitEventsHelper
+end
