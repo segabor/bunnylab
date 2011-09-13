@@ -43,8 +43,12 @@ class RabbitEventsController < ApplicationController
 		logger.debug("RECORD called")
 
 		# Write audio to temp file
-		File.open("/Users/segabor/Desktop/audio.wav", 'wb') do |handle|
-			handle.write(request.raw_post)
+		Tempfile.open(['audio_', '.wav']) do |handle|
+			handle.binmode
+			handle.write( request.raw_post )
+			handle.flush
+			
+			logger.debug handle.path
 		end
 
 		render_event
