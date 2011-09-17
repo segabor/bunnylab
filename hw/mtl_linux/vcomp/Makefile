@@ -1,3 +1,9 @@
+CXXFLAGS=-DVSIMU -g3 -m32
+CFLAGS=-DVSIMU -g3  # -std=c99 
+
+CC=gcc
+CXX=g++
+
 OBJS = \
 	bootstrap.o \
 	compiler_file.o \
@@ -20,8 +26,8 @@ libvcomp.a : $(OBJS)
 	ar rcs $@ $(OBJS)
 	ranlib $@
 
-# %.o : %.cpp
-# 	g++ -c $^ -o $@
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 clean :
 	rm $(OBJS)
