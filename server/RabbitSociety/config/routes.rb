@@ -1,6 +1,7 @@
 RabbitSociety::Application.routes.draw do
-	match 'vl/bc.jsp' => 'before_christ#index'
-	match 'vl/locate.jsp' => 'before_christ#locate'
+	match 'vl/bc.jsp' => 'configuration#bootcode'
+	match 'vl/locate.jsp' => 'configuration#locate'
+
 	match 'vl/sendMailXMPP.jsp' => 'before_christ#sendMailXMPP'
 	
 	# Events
