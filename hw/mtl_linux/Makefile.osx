@@ -3,7 +3,7 @@ COMMON_OBJS=properties.o dumpbc.o log.o
 
 COMP_OBJS=main_compiler.o
 
-SIMU_SRC=main_simu.c mac_simu.c mac_simuaudio.c mac_simunet.c vmem.c vloader.c vlog.c vinterp.c vaudio.c vnet.c
+SIMU_SRC=main_simu.c mac_simu.c mac_simuaudio.c linux_simunet.c vmem.c vloader.c vlog.c vinterp.c vaudio.c vnet.c
 SIMU_OBJS=$(SIMU_SRC:.c=.o)
 
 CXXFLAGS=-DVSIMU -g3 -m32
