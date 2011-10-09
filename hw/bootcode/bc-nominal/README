@@ -1,4 +1,4 @@
-This project contains the bootcode that Nabaztag rabbits loads and execute when they are turned on.
+This project contains the bootcode that Nabaztag rabbits load and execute when they are turned on.
 
 To compile the code simply issue a 'make' in command line. It yields three files, nominal.mtl, simulator.mtl and bc-nominal.bin.
 
