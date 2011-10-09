@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dhcp_protos.mtl"
 #include "dns_protos.mtl"
 

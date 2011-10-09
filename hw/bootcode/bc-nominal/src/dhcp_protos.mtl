@@ -1,2 +1,4 @@
+#pragma once
+
 proto startdhcp 0 ;;
 proto startdhcpserver 0 ;;

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "arp_protos.mtl"
 
 const ARPREQ=1;;

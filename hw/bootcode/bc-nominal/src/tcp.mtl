@@ -1,3 +1,5 @@
+#pragma once
+
 #include "tcp_protos.mtl"
 #include "arp_protos.mtl"
 

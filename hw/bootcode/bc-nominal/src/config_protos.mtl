@@ -1,3 +1,5 @@
+#pragma once
+
 proto confGetWifissid 0 ;;
 proto confGetWificrypt 0 ;;
 proto confGetWifikey0 0 ;;

@@ -1,3 +1,5 @@
+#pragma once
+
 var netip="\0\0\0\0";;
 var netmask="\255\255\255\0";;
 var netgateway="\0\0\0\0";;

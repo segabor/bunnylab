@@ -1,3 +1,5 @@
+#pragma once
+
 const HTTP_NORMAL=0;;
 const HTTP_STREAM=1;;
 const HTTP_DIRECT=2;;

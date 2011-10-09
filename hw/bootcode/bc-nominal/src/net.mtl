@@ -1,3 +1,5 @@
+#pragma once
+
 #include "net_protos.mtl"
 #include "net_vars.mtl"
 

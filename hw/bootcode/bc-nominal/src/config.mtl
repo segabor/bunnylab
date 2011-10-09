@@ -1,3 +1,5 @@
+#pragma once
+
 #include "config_protos.mtl"
 
 const CONF_SERVERURL=0;;		//41

@@ -1,3 +1,5 @@
+#pragma once
+
 /** met toutes les leds du lapin dans la couleur rgbCode */
 proto setleds 1 ;; // rgbCode
 

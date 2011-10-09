@@ -1,3 +1,5 @@
+#pragma once
+
 var buttonlast;;
 var buttontime;;
 var buttonevent;;
