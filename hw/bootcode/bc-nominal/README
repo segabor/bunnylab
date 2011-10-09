@@ -1,0 +1,6 @@
+This project contains the bootcode that Nabaztag rabbits loads and execute when they are turned on.
+
+To compile the code simply issue a 'make' in command line. It yields three files, nominal.mtl, simulator.mtl and bc-nominal.bin.
+
+nominal.mtl is the bootcode source made from pieces located in src folder. simulator.mtl is a version for simulator (see mtl_linux project for more). The third file is complied from nominal.mtl to a special binary format that can be executed by the rabbit's virtual machine.
+
