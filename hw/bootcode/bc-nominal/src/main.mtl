@@ -3820,9 +3820,9 @@ fun interactiveSendRfid tag =
 	set run=interactiveReqWaitRun (httprequest "GET" (interactifurl_rfid gItApp tag) nil #_interactiveReqCBhttp HTTP_NORMAL);
 	0;;
 
-//*******************
-// Ears turned
-//*******************
+/*******************/
+/* Ears turned     */
+/*******************/
 type EarTouch=[num_ET refPos_ET moveDir_ET lastDV_ET lastMoveTime_ET turned_ET];;
 var earsTouch;;
 const EAR_TOUCH_TIMEOUT=1000;;
@@ -4236,9 +4236,10 @@ fun runWaitCmd i0 =
 	)
 ;;
 
-//********************************************************
-// Executes the i0'th command in the 'gCurrentProgram' program
-// a command is a list [key val]
+/***************************************************************/
+/* Executes the i0'th command in the 'gCurrentProgram' program */
+/* a command is a list [key val]                               */
+/***************************************************************/
 fun runEvalOneCommand i0=
 //	Secho "runEvalOneCommand ";Iecholn i0;
 	interactiveResetEarsTouched;
@@ -4581,8 +4582,9 @@ fun evalTrame ping_trame=
 	;;
 
 
-//*******************
-// Trames queue
+/*******************/
+/* Trames queue    */
+/*******************/
 var gTramesQueue = nil;;
 const TRAME_QUEUE_MAXLEN = 10;;
 
