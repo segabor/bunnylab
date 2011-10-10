@@ -19,12 +19,16 @@ const IEEE80211_M_MASTER=1;;
 var wifitry;;
 var master=0;;
 
-#include "utils.mtl"
-#include "net_vars.mtl"
-#include "dhcp_protos.mtl"
-#include "udp_protos.mtl"
-#include "dns_protos.mtl"
+#ifndef SIMU
 #include "net_protos.mtl"
+#include "net_vars.mtl"
+#include "tcp_protos.mtl"
+#include "udp_protos.mtl"
+#include "arp_protos.mtl"
+#include "dhcp_protos.mtl"
+#include "dns_protos.mtl"
+#endif
+#include "utils.mtl"
 #include "env_protos.mtl"
 #include "leds_protos.mtl"
 #include "config_protos.mtl"
@@ -260,10 +264,15 @@ fun wifiReady= match wifi with (stationW -> 1)|(_ -> 0);;
 
 fun wifiConnected= match wifi with (stationW -> 1)|(_ -> 0);;
 
+#ifdef SIMU
+#include "tcpudp_emu.mtl"
+#else
 #include "dhcp.mtl"
 #include "udp.mtl"
-#include "dns.mtl"
 #include "net.mtl"
+#endif
+
+#include "dns.mtl"
 #include "env.mtl"
 #include "leds.mtl"
 #include "config.mtl"
