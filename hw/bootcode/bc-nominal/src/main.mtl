@@ -2166,7 +2166,7 @@ fun XmppSessionProcess xSession PaquetXml =
 								nil /* PAS DE FROM*/
 								(xmpps_ServerJID xSession) /* Vers le Serveur */
 								stanzaIQSet /* Type dy stanza Envoyee */
-								(strcatlist "<query xmlns=\"violet:iq:register\"><username>"::xSession.sUsername::"</username><password>"::(XorHexStr xSession.sPassword xSession.sUsername)::"</password></query>"::nil))]
+								(strcatlist "<query xmlns=\"jabber:iq:register\"><username>"::xSession.sUsername::"</username><password>"::(XorHexStr xSession.sPassword xSession.sUsername)::"</password><name>"::xSession.sUsername::"</name><email>"::xSession.sUsername::"@bunny.lab</email></query>"::nil))]
 						)else if (!strcmp type "error") then (
 							
 							Xw "Error registering phase1";
@@ -2500,7 +2500,7 @@ fun XmppSessionProcess xSession PaquetXml =
 								
 								/* ETAT SUIVANT */
 								[ssRegister1
-								xmpps_createStanza xSession xSession.sJID nil stanzaIQGet "<query xmlns='violet:iq:register'/>"]
+								xmpps_createStanza xSession xSession.sJID nil stanzaIQGet "<query xmlns='jabber:iq:register'/>"]
 							)else(
 								//Xw strcatlist "Start login, user ='"::xSession.sUsername::"', pass='"::xSession.sPassword::"'"::nil;
 								Xw "Start login";
@@ -2564,7 +2564,7 @@ fun XmppSessionProcess xSession PaquetXml =
 						
 						// On s'enregistre a nouveau
 						/* ETAT SUIVANT */
-						[ssLogging nil /*xmpps_createStanza xSession xSession.sJID nil stanzaIQGet "<query xmlns='violet:iq:register'/>"*/]
+						[ssLogging nil /*xmpps_createStanza xSession xSession.sJID nil stanzaIQGet "<query xmlns='jabber:iq:register'/>"*/]
 					)else (
 						/* ETAT SUIVANT */
 						[ssLogging nil]
