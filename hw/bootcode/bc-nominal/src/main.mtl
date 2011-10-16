@@ -2170,7 +2170,7 @@ fun XmppSessionProcess xSession PaquetXml =
 								nil /* PAS DE FROM*/
 								(xmpps_ServerJID xSession) /* Vers le Serveur */
 								stanzaIQSet /* Type dy stanza Envoyee */
-								(strcatlist "<query xmlns=\"jabber:iq:register\"><username>"::xSession.sUsername::"</username><password>"::(XorHexStr xSession.sPassword xSession.sUsername)::"</password><name>"::xSession.sUsername::"</name><email>"::xSession.sUsername::"@bunny.lab</email></query>"::nil))]
+								(strcatlist "<query xmlns=\"jabber:iq:register\"><username>"::xSession.sUsername::"</username><password>"::(XorHexStr xSession.sPassword xSession.sUsername)::"</password></query>"::nil))]
 						)else if (!strcmp type "error") then (
 							
 							Xw "Error registering phase1";
