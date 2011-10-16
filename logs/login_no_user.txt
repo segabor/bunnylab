@@ -1,0 +1,246 @@
+##
+## Debug Log of Nabaztag <-> Openfire Jabber server communication
+## Nabaztag user is not created yet, auto-register will be initiated
+##
+## Oct 16, 2011
+##
+
+*** Open XMPP Connection ***
+
+
+SEND:
+
+<?xml version='1.0' encoding='UTF-8'?>
+<stream:stream to='almacska' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>
+
+
+RECEIVE:
+
+<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" from="almacska" id="1b3a6b" xml:lang="en" version="1.0"><stream:features><mechanisms xmlns="urn:ietf:params:xml:ns:xmpp-sasl"><mechanism>DIGEST-MD5</mechanism><mechanism>PLAIN</mechanism><mechanism>ANONYMOUS</mechanism><mechanism>CRAM-MD5</mechanism></mechanisms><compression xmlns="http://jabber.org/features/compress"><method>zlib</method></compression><auth xmlns="http://jabber.org/features/iq-auth"/><register xmlns="http://jabber.org/features/iq-register"/></stream:features>
+
+[vm] Receive : 
+[vm]     |stream:features
+[vm]     |..mechanisms
+[vm]     |   xmlns => urn:ietf:params:xml:ns:xmpp-sasl
+[vm]     |....mechanism
+[vm]     !......DIGEST-MD5
+[vm]     |....mechanism
+[vm]     !......PLAIN
+[vm]     |....mechanism
+[vm]     !......ANONYMOUS
+[vm]     |....mechanism
+[vm]     !......CRAM-MD5
+[vm]     |..compression
+[vm]     |   xmlns => http://jabber.org/features/compress
+[vm]     |....method
+[vm]     !......zlib
+[vm]     |..auth
+[vm]     |   xmlns => http://jabber.org/features/iq-auth
+[vm]     |..register
+[vm]     |   xmlns => http://jabber.org/features/iq-register
+
+
+
+** AUTHENTICATE **
+
+SEND:
+
+<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>
+
+RECEIVE:
+
+<challenge xmlns="urn:ietf:params:xml:ns:xmpp-sasl">cmVhbG09ImFsbWFjc2thIixub25jZT0iemF2b3FHS0VaWnBpRWlUZldNV2RMNktCK0ZkcFdqdk5oODMwQ2xFZiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+
+[vm] rcv challenge:
+[vm] snd response
+
+
+SEND:
+
+<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>dXNlcm5hbWU9ImY4MWVkZmVlMjdjMSIscmVhbG09ImFsbWFjc2thIixub25jZT0iemF2b3FHS0VaWnBpRWlUZldNV2RMNktCK0ZkcFdqdk5oODMwQ2xFZiIsY25vbmNlPSIwMjUzMjA2ODI2NTAwACIsbmM9MDAwMDAwMDEscW9wPWF1dGgsZGlnZXN0LXVyaT0ieG1wcC9hbG1hY3NrYSIscmVzcG9uc2U9OGFhNzU2ZGVlODFlNWRmNTRjNTZlYjgzNGE1N2NjMDcsY2hhcnNldD11dGYtOA=</response>
+
+RECEIVE:
+
+<failure xmlns="urn:ietf:params:xml:ns:xmpp-sasl"><not-authorized/></failure>
+
+[vm] Receive : 
+[vm]     |failure
+[vm]     | xmlns => urn:ietf:params:xml:ns:xmpp-sasl
+[vm]     !..<not-authorized/>
+
+[vm] Failure to login. Warn server and re-register
+[vm] HTTPREQUEST url=almacska:3000/vl/sendMailXMPP.jsp?m=f81edfee27c1&d=almacska&r=FailureLogin&v=18673
+
+
+** Get features **
+
+SEND:
+
+<?xml version='1.0' encoding='UTF-8'?>
+<stream:stream to='almacska' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>
+
+RECEIVE:
+
+<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" from="almacska" id="6b4c6f" xml:lang="en" version="1.0"><stream:features><mechanisms xmlns="urn:ietf:params:xml:ns:xmpp-sasl"><mechanism>DIGEST-MD5</mechanism><mechanism>PLAIN</mechanism><mechanism>ANONYMOUS</mechanism><mechanism>CRAM-MD5</mechanism></mechanisms><compression xmlns="http://jabber.org/features/compress"><method>zlib</method></compression><auth xmlns="http://jabber.org/features/iq-auth"/><register xmlns="http://jabber.org/features/iq-register"/></stream:features>
+
+
+[vm] Receive : 
+[vm]     |stream:features
+[vm]     |..mechanisms
+[vm]     |   xmlns => urn:ietf:params:xml:ns:xmpp-sasl
+[vm]     |....mechanism
+[vm]     !......DIGEST-MD5
+[vm]     |....mechanism
+[vm]     !......PLAIN
+[vm]     |....mechanism
+[vm]     !......ANONYMOUS
+[vm]     |....mechanism
+[vm]     !......CRAM-MD5
+[vm]     |..compression
+[vm]     |   xmlns => http://jabber.org/features/compress
+[vm]     |....method
+[vm]     !......zlib
+[vm]     |..auth
+[vm]     |   xmlns => http://jabber.org/features/iq-auth
+[vm]     |..register
+[vm]     |   xmlns => http://jabber.org/features/iq-register
+
+[vm] Receive stream:features
+[vm] Receive mechanisms
+[vm] No password (or not good) : start register
+
+
+*** find out how to register an account ***
+
+SEND:
+
+<iq type='get' id='1'><query xmlns='jabber:iq:register'/></iq>
+
+
+RECEIVE:
+
+<iq type="result" id="1">
+	<query xmlns="jabber:iq:register">
+		<username/><password/><email/><name/>
+		<x xmlns="jabber:x:data" type="form">
+			<title>XMPP Client Registration</title>
+			<instructions>Please provide the following information</instructions>
+			<field var="FORM_TYPE" type="hidden"><value>jabber:iq:register</value></field>
+			<field var="username" type="text-single" label="Username"><required/></field>
+			<field var="name" type="text-single" label="Full name"/>
+			<field var="email" type="text-single" label="Email"/>
+			<field var="password" type="text-private" label="Password"><required/></field>
+		</x>
+	</query>
+</iq>
+
+
+[vm] Receive : 
+[vm]     |iq
+[vm]     | type => result
+[vm]     | id => 1
+[vm]     |..query
+[vm]     |   xmlns => jabber:iq:register
+[vm]     !....<username/><password/><email/><name/><x xmlns="jabber:x:data" type="form"><title>XMPP Client Registration</title><instructions>Please provide the following information</instructions><field var="FORM_TYPE" type="hidden"><value>jabber:iq:register</value></field><field var="username" type="text-single" label="Username"><required/></field><field var="name" type="text-single" label="Full name"/><field var="email" type="text-single" label="Email"/><field var="password" type="text-private" label="Password"><required/></field></x>
+
+
+
+[vm] State : Register // Step 1
+[vm] Go to state : Register // Step 2 -- start register
+
+
+SEND:
+
+<iq to='almacska' type='set' id='2'>
+	<query xmlns="jabber:iq:register">
+		<username>f81edfee27c1</username>
+		<password>b64df9cf54ab</password>
+		<name>f81edfee27c1</name>
+		<email>f81edfee27c1@bunny.lab</email>
+	</query>
+</iq>
+
+RECEIVE:
+
+<iq type="result" id="2" from="almacska" to="almacska/6b4c6f"/>
+
+[vm]     |iq
+[vm]     | type => result
+[vm]     | id => 2
+[vm]     | from => almacska
+[vm]     | to => almacska/6b4c6f
+
+[vm] State : Register // Step 2
+[vm] Register succeeded
+[vm] snd start login
+
+
+** LOGIN / AUTH PHASE **
+
+SEND:
+
+<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='DIGEST-MD5'/>
+
+RECEIVE:
+
+<challenge xmlns="urn:ietf:params:xml:ns:xmpp-sasl">cmVhbG09ImFsbWFjc2thIixub25jZT0ieDJqZmg0TExUMWRBK1daSmFCL0d6di9RNVRCM29lZWhKSVBYcTJQOCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+
+[vm] Receive : 
+[vm]     |challenge
+[vm]     | xmlns => urn:ietf:params:xml:ns:xmpp-sasl
+[vm]     !..cmVhbG09ImFsbWFjc2thIixub25jZT0ieDJqZmg0TExUMWRBK1daSmFCL0d6di9RNVRCM29lZWhKSVBYcTJQOCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==
+
+[vm] State Logging
+[vm] rcv challenge:
+[vm] snd response
+
+SEND:
+
+<response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>dXNlcm5hbWU9ImY4MWVkZmVlMjdjMSIscmVhbG09ImFsbWFjc2thIixub25jZT0ieDJqZmg0TExUMWRBK1daSmFCL0d6di9RNVRCM29lZWhKSVBYcTJQOCIsY25vbmNlPSI5NjA3NTgwNTg0NDA1ACIsbmM9MDAwMDAwMDEscW9wPWF1dGgsZGlnZXN0LXVyaT0ieG1wcC9hbG1hY3NrYSIscmVzcG9uc2U9Yjk4YjYwMTQzMDdkMTE0ODA4MTk5ZTc4ZGRhNjQ4ZDcsY2hhcnNldD11dGYtOA=</response>
+
+RECEIVE:
+
+<failure xmlns="urn:ietf:params:xml:ns:xmpp-sasl"><not-authorized/></failure>
+
+
+[vm] Failure to login. Warn server and re-register
+[vm] HTTPREQUEST url=almacska:3000/vl/sendMailXMPP.jsp?m=f81edfee27c1&d=almacska&r=FailureLogin&v=18673
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

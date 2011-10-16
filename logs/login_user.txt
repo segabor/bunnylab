@@ -1,0 +1,178 @@
+##
+## Debug Log of Nabaztag <-> Openfire Jabber server communication
+## Nabaztag user is already created, only login should be happened
+##
+## Oct 16, 2011
+##
+
+*** Open XMPP Connection ***
+
+SEND:
+
+<?xml version='1.0' encoding='UTF-8'?>
+<stream:stream to='almacska' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' version='1.0'>
+
+
+
+RECEIVE:
+
+<?xml version='1.0' encoding='UTF-8'?><stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" from="almacska" id="d4379d2a" xml:lang="en" version="1.0"><stream:features><mechanisms xmlns="urn:ietf:params:xml:ns:xmpp-sasl"><mechanism>DIGEST-MD5</mechanism><mechanism>PLAIN</mechanism><mechanism>ANONYMOUS</mechanism><mechanism>CRAM-MD5</mechanism></mechanisms><compression xmlns="http://jabber.org/features/compress"><method>zlib</method></compression><auth xmlns="http://jabber.org/features/iq-auth"/><register xmlns="http://jabber.org/features/iq-register"/></stream:features>
+
+[vm] Receive : 
+[vm]     |stream:features
+[vm]     |..mechanisms
+[vm]     |   xmlns => urn:ietf:params:xml:ns:xmpp-sasl
+[vm]     |....mechanism
+[vm]     !......DIGEST-MD5
+[vm]     |....mechanism
+[vm]     !......PLAIN
+[vm]     |....mechanism
+[vm]     !......ANONYMOUS
+[vm]     |....mechanism
+[vm]     !......CRAM-MD5
+[vm]     |..compression
+[vm]     |   xmlns => http://jabber.org/features/compress
+[vm]     |....method
+[vm]     !......zlib
+[vm]     |..auth
+[vm]     |   xmlns => http://jabber.org/features/iq-auth
+[vm]     |..register
+[vm]     |   xmlns => http://jabber.org/features/iq-register
+
+
+
+*** find out how to register an account ***
+
+SEND:
+<iq type='get' id='1'><query xmlns='jabber:iq:register'/></iq>
+
+
+RECEIVE:
+
+<iq type="result" id="1"><query xmlns="jabber:iq:register"><username/><password/><email/><name/><x xmlns="jabber:x:data" type="form"><title>XMPP Client Registration</title><instructions>Please provide the following information</instructions><field var="FORM_TYPE" type="hidden"><value>jabber:iq:register</value></field><field var="username" type="text-single" label="Username"><required/></field><field var="name" type="text-single" label="Full name"/><field var="email" type="text-single" label="Email"/><field var="password" type="text-private" label="Password"><required/></field></x></query></iq>
+
+[vm] Receive : 
+[vm]     |iq
+[vm]     | type => result
+[vm]     | id => 1
+[vm]     |..query
+[vm]     |   xmlns => jabber:iq:register
+[vm]     !....<username/><password/><email/><name/><x xmlns="jabber:x:data" type="form"><title>XMPP Client Registration</title><instructions>Please provide the following information</instructions><field var="FORM_TYPE" type="hidden"><value>jabber:iq:register</value></field><field var="username" type="text-single" label="Username"><required/></field><field var="name" type="text-single" label="Full name"/><field var="email" type="text-single" label="Email"/><field var="password" type="text-private" label="Password"><required/></field></x>
+
+
+
+[vm] Go to state : Register // Step 2 -- start register
+
+
+SEND:
+
+<iq to='almacska' type='set' id='2'>
+	<query xmlns="jabber:iq:register">
+		<username>f81edfee27c1</username>
+		<password>83279de2ea5c</password>
+		<name>f81edfee27c1</name>
+		<email>f81edfee27c1@bunny.lab</email>
+	</query>
+</iq>
+
+
+RECEIVE:
+
+<iq type="error" id="2" from="almacska" to="almacska/d4379d2a">
+	<query xmlns="jabber:iq:register">
+		<username>f81edfee27c1</username>
+		<password>83279de2ea5c</password>
+		<name>f81edfee27c1</name>
+		<email>f81edfee27c1@bunny.lab</email>
+	</query>
+	<error code="409" type="cancel">
+		<conflict xmlns="urn:ietf:params:xml:ns:xmpp-stanzas"/>
+	</error>
+</iq>
+
+[vm] State : Register // Step 2
+[vm] XML in=[
+[vm]     |iq
+[vm]     | type => error
+[vm]     | id => 2
+[vm]     | from => almacska
+[vm]     | to => almacska/d4379d2a
+[vm]     |..query
+[vm]     |   xmlns => jabber:iq:register
+[vm]     |....username
+[vm]     !......f81edfee27c1
+[vm]     |....password
+[vm]     !......83279de2ea5c
+[vm]     |....name
+[vm]     !......f81edfee27c1
+[vm]     |....email
+[vm]     !......f81edfee27c1@bunny.lab
+[vm]     |..error
+[vm]     |   code => 409
+[vm]     |   type => cancel
+[vm]     |....conflict
+[vm]     |     xmlns => urn:ietf:params:xml:ns:xmpp-stanzas
+[vm] ]
+
+[vm] error registering phase2
+[vm] HTTPREQUEST url=almacska:3000/vl/sendMailXMPP.jsp?m=f81edfee27c1&d=almacska&r=FailureRegister2&v=18673
+
+
+
+** BIND TO RESOURCE **
+
+SEND:
+
+<iq from="f81edfee27c1@almacska" to="almacska" type='set' id='3'>
+	<bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'>
+		<resource>idle</resource>
+	</bind>
+</iq>
+
+
+RECEIVE:
+
+
+<iq type="result" id="3" from="almacska" to="almacska/d4379d2a">
+	<bind xmlns="urn:ietf:params:xml:ns:xmpp-bind">
+		<jid>almacska/d4379d2a</jid>
+	</bind>
+</iq>
+
+[vm] Receive : 
+[vm]     |iq
+[vm]     | type => result
+[vm]     | id => 3
+[vm]     | from => almacska
+[vm]     | to => almacska/d4379d2a
+[vm]     |..bind
+[vm]     |   xmlns => urn:ietf:params:xml:ns:xmpp-bind
+[vm]     |....jid
+[vm]     !......almacska/d4379d2a
+
+
+[vm] State : Binding From :  To : idle -- 
+[vm] Bind Done!
+[vm] JID=almacska/d4379d2a
+[vm] Resource=d4379d2a
+
+
+
+
+** INITIATE SESSION **
+
+SEND:
+
+<iq from='almacska/d4379d2a' to='almacska' type='set' id='4'>
+	<session xmlns='urn:ietf:params:xml:ns:xmpp-session'/>
+</iq>
+
+
+RECEIVE:
+
+<iq type="error" id="4" from="almacska" to="almacska/d4379d2a">
+	<session xmlns="urn:ietf:params:xml:ns:xmpp-session"/>
+	<error code="401" type="auth">
+		<not-authorized xmlns="urn:ietf:params:xml:ns:xmpp-stanzas"/>
+	</error>
+</iq>
