@@ -1486,8 +1486,12 @@ fun xmpps_OurJID xSession =
  * Retourne un JID pour le bind.
  */	
 fun xmpps_BindJID xSession resource =
-	strcatlist xSession.sUsername::"@"::xSession.sDomain::"/"::resource::nil;;
-
+	if (resource == nil) then (
+		strcatlist xSession.sUsername::"@"::xSession.sDomain::nil
+	) else (
+		strcatlist xSession.sUsername::"@"::xSession.sDomain::"/"::resource::nil
+	)
+;;
 // -----------------------------------
 
 
