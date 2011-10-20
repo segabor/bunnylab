@@ -1302,9 +1302,8 @@ fun SechoListWithSlash stringlist=
 // Creation d'une chaine aléatoire
 const gSasl_RandomStringChars = "0123456789528460";; // 16 chars
 fun Sasl_randomString nbChars=
-	let strnew (nbChars+1) -> res in (
+	let strnew (nbChars) -> res in (
 		for i=0; i<nbChars do ( strset res i (strget gSasl_RandomStringChars rand&15) );
-		strset res nbChars 0;
 		res
 	);;
 
