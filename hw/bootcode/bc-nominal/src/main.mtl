@@ -1310,7 +1310,7 @@ fun Sasl_randomString nbChars=
 fun Sasl_response_value xSession authstring=
 	// compute the response_value
 	let strcatlist "xmpp/"::xSession.sDomain::nil -> digest_uri in
-	let (md5bytes strcatlist xSession.sUsername::":"::(if (xSession.sRealm != nil) then xSession.sRealm else "")::":"::xSession.sPassword::nil) -> A11 in
+	let (md5bytes strcatlist xSession.sUsername::":"::(if (xSession.sRealm != nil) then xSession.sRealm else "")::":"::(XorHexStr xSession.sPassword xSession.sUsername)::nil) -> A11 in
 	let strcatlist ":"::xSession.sNonce::":"::xSession.sCnonce::nil -> A12 in
 	let strcatlist A11::A12::nil -> A1 in
 	(
