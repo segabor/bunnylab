@@ -4,7 +4,7 @@ UNAME := $(shell uname)
 # Linux specific sources and libs
 ifeq ($(UNAME), Linux)
 PLATF_SIMU_SRC=linux_simu.c linux_simuaudio.c linux_simunet.c
-PLATF_SIMU_LIB=
+PLATF_SIMU_LIB=-ldl -pthread
 endif
 
 # OS X specific sources and libs
