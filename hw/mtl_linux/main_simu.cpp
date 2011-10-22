@@ -17,14 +17,6 @@ extern "C" {
 #include"properties.h"
 #include "log.h"
 
-/* Mongoose includes */
-#ifdef WEBUI
-#include "mongoose.h"
-
-static void *callback(enum mg_event event, struct mg_connection *conn, const struct mg_request_info *request_info);
-
-#endif
-
 int simuInit();
 
 // fonction à appeler régulièrement, pour traiter les messages de la fenêtre du simulateur
@@ -132,13 +124,6 @@ int main(int argc,char **argv)
 		VPUSH(INTTOVAL(0));
 		interpGo();
 		VPULL();
-
-#ifdef WEBUI
-		struct mg_context *ctx;
-		const char *options[] = {"listening_ports", "6543", NULL};
-
-	  ctx = mg_start(&callback, NULL, options);
-#endif
 		while(1)
 		{
 			simuDoLoop();
@@ -148,32 +133,11 @@ int main(int argc,char **argv)
 
 			usleep(50 * 1000);
 		}
-
 		getchar();
 	}
 	return 0;
 }
 
-
-
-#ifdef WEBUI
-/* Callback */
-static void *callback(enum mg_event event,
-                      struct mg_connection *conn,
-                      const struct mg_request_info *request_info)
-{
-	// do something, get some info from bunny
-  if (event == MG_NEW_REQUEST) {
-    // Echo requested URI back to the client
-    mg_printf(conn, "HTTP/1.1 200 OK\r\n"
-              "Content-Type: text/plain\r\n\r\n"
-              "%s", request_info->uri);
-    return (void *)"";  // Mark as processed
-  } else {
-    return NULL;
-  }
-}
-#endif
 
 /**
 	 Retourne une valeur différente de 0 si la chaîne non vide passée en argument

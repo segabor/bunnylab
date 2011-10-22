@@ -4,7 +4,7 @@ UNAME := $(shell uname)
 # Linux specific sources and libs
 ifeq ($(UNAME), Linux)
 PLATF_SIMU_SRC=linux_simu.c linux_simuaudio.c linux_simunet.c
-PLATF_SIMU_LIB=-ldl -pthread
+PLATF_SIMU_LIB=
 endif
 
 # OS X specific sources and libs
@@ -20,10 +20,7 @@ COMP_OBJS=main_compiler.o
 SIMU_SRC=main_simu.c $(PLATF_SIMU_SRC) vmem.c vloader.c vlog.c vinterp.c vaudio.c vnet.c
 SIMU_OBJS=$(SIMU_SRC:.c=.o)
 
-MONGOOSE_SRC=mongoose/mongoose.c
-MONGOOSE_OBJS=$(MONGOOSE_SRC:.c=.o)
-
-CXXFLAGS=-DVSIMU -DWEBUI -g3 -m32 -Imongoose
+CXXFLAGS=-DVSIMU -DWEBUI -g3 -m32
 CFLAGS=-DVSIMU -DWEBUI -g3 -m32
 
 CC=gcc
@@ -40,7 +37,7 @@ mtl_comp : vcomp/libvcomp.a $(COMMON_OBJS) $(COMP_OBJS)
 	$(CXX) $(CXXFLAGS)  $^ -o $@ vcomp/libvcomp.a
 #	g++  $^ -o $@ vcomp/*.o
 
-mtl_simu : vcomp/libvcomp.a $(COMMON_OBJS) $(SIMU_OBJS) $(MONGOOSE_OBJS)
+mtl_simu : vcomp/libvcomp.a $(COMMON_OBJS) $(SIMU_OBJS)
 	$(CXX) $(CXXFLAGS)  $^ -o $@ vcomp/libvcomp.a $(PLATF_SIMU_LIB)
 #	g++  $^ -o $@ vcomp/*.o
 
@@ -58,4 +55,4 @@ mtl_simu : vcomp/libvcomp.a $(COMMON_OBJS) $(SIMU_OBJS) $(MONGOOSE_OBJS)
 
 clean :
 	$(MAKE) -C vcomp clean
-	rm -f $(COMMON_OBJS) $(COMP_OBJS) $(SIMU_OBJS) $(MONGOOSE_OBJS)
+	rm -f $(COMMON_OBJS) $(COMP_OBJS) $(SIMU_OBJS)
