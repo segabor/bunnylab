@@ -71,5 +71,5 @@ install:
 	install -m 0755 mtl_simu $(DSTROOT)/bin
 	rm -rf $(DOCROOT)
 	mkdir $(DOCROOT)
+	cp webui/index.html $(DOCROOT)
 	cp -r webui/lib $(DOCROOT)/lib
-

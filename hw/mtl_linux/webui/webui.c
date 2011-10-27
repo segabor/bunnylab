@@ -14,27 +14,14 @@ void *handleWebRequest(enum mg_event event, struct mg_connection *conn, const st
 			// Let files put in lib handle by Mongoose
 			return NULL;
 		} else if (!strcmp("/", request_info->uri)) {
-			// 
-			// Echo requested URI back to the client
-			mg_printf(conn, "HTTP/1.1 200 OK\r\n"
-				"Content-Type: text/html\r\n\r\n"
-				"<!DOCTYPE html>\r\n"
-				"<html>\r\n"
-				"<head>\r\n"
-				"  <title>Bunnylab</title>\r\n"
-				"  <meta charset=\"utf-8\">\r\n"
-				"  <script src=\"/lib/prototype.js\"></script>\r\n"
-				"  <script src=\"/lib/scriptaculous.js\"></script>\r\n"
-				"</head>\r\n"
-				"<body>\r\n"
-				"</body>\r\n"
-				"</html>\r\n"
-				""
-			);
-
-			return (void *)"";  // Mark as processed
+		  mg_printf(conn, "HTTP/1.1 302 Found\r\n"
+		      "Set-Cookie: original_url=%s\r\n"
+		      "Location: /index.html\r\n\r\n",
+		      request_info->uri);
+			return "";
+		} else if (!strcmp("/index.html", request_info->uri)) {
+			return NULL;
 		}
-
 	} else {
 		return NULL;
 	}
