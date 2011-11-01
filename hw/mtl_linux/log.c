@@ -67,7 +67,7 @@ static int print_line_by_line(e_logtypes t, char *s, int force)
 	int nbwritten=0;
 	char pfx[256];
 	if (do_log_time)
-		snprintf(pfx,255, "%06d %s", time(NULL) - time_first_log, get_prefix(t));
+		snprintf(pfx,255, "%06d %s", (int)(time(NULL) - time_first_log), get_prefix(t));
 	else
 		strncpy(pfx, get_prefix(t), 255);
 	while (*s!='\0')
@@ -175,7 +175,7 @@ void my_printf_set_options(const char *s)
 		else if (!strcmp(token,"simumotors"))
 			my_msk |= LOG_SIMUMOTORS;
 		else {
-				fprintf(stderr, "erreur: %s n'est pas une option valide pour les logs\n");
+				fprintf(stderr, "erreur: %s n'est pas une option valide pour les logs\n", s);
 				break;
 		}
 		token = strtok(NULL, ",");
