@@ -1,26 +1,15 @@
 /**
 ** WEB UI implementation of Simu module
 **/
-/***
 
-"_simuInit", referenced from:
-"_simuDoLoop", referenced from:
-"_simuSetLed", referenced from:
-"_set_motor_dir", referenced from:
-"_get_motor_val", referenced from:
+#include <stdio.h>
 
-"_getButton", referenced from:
-"_get_button3", referenced from:
-"_get_rfid", referenced from:
+#include "motor_simu.h"
 
-"_PlayStart", referenced from:
-"_PlayEof", referenced from:
-"_PlayStop", referenced from:
-"_audioSetVolume", referenced from:
-"_RecStart", referenced from:
-"_RecStop", referenced from:
+// linux_simunet.c
+extern void checkAllEvents(void);
+extern int checkNetworkEvents(void);
 
-**/
 
 
 /*
@@ -29,12 +18,27 @@
 
 
 int simuInit() {
+	fprintf(stderr, "simuInit()\n");
+
+	// function defined in linux_simunet.c
+	simunetinit();
+
+	motorsInit();
+
 	return 0;
 }
 
 
 
 int simuDoLoop() {
+	// always called
+	// fprintf(stderr, "simuDoLoop()\n");
+	
+	// function defined in linux_simunet.c
+	checkNetworkEvents();
+
+	motorsLoop();
+
 	return 0;
 }
 
@@ -45,19 +49,17 @@ int simuDoLoop() {
  */
 
 
-void simuSetMotor(int i, int val) {
-	
-}
-
-
 
 void set_motor_dir(int num_motor, int sens) {
-	
+	// fprintf(stderr, "set_motor_dir(%d, %d)\n", num_motor, sens);
+	motorsSetDirection(num_motor, sens);
 }
 
 
 int get_motor_val(int i) {
-	return 0;
+	int v = motorsGetValue(i);
+	// fprintf(stderr, "get_motor_val(%d) => %d\n",i, v);
+	return v;
 }
 
 
@@ -67,28 +69,34 @@ int get_motor_val(int i) {
  */
 
 
-void simuSetLed(int i, int val)
-{
+void simuSetLed(int i, int val) {
+	fprintf(stderr, "simuSetLed(%d, %d)\n", i, val);
 	
 }
 
 
 
 // FIXME: what does it do?
-int getButton() { return 0; }
+int getButton() {
+	// always called
+	// fprintf(stderr, "getButton()\n");
+	return 0;
+}
 
 
 
 // FIXME: ???
 int get_button3() {
+	// always called
+	// fprintf(stderr, "get_button3()\n");
 	return 0;
 }
 
 
 // char buf_rfid[256];
 // FIXME
-char* get_rfid()
-{
+char* get_rfid() {
+	fprintf(stderr, "get_rfid()\n");
 	return 0;
 }
 
@@ -97,29 +105,36 @@ char* get_rfid()
  * ---------- Audio functions ---------- 
  */
 int PlayStart() {
+	fprintf(stderr, "PlayStart()\n");
 	return 0;
 }
 
 
 int PlayStop() {
+	fprintf(stderr, "PlayStop()\n");
 	return 0;
 }
 
 
 int PlayEof() {
+	fprintf(stderr, "PlayEof()\n");
 	return 0;
 }
 
 
 int RecStart(int rate,int ChannelSize,int nbBuffers) {
+	fprintf(stderr, "RecStart(%d, %d, %d)\n", rate, ChannelSize, nbBuffers);
 	return 0;
 }
 
 
 int RecStop() {
+	fprintf(stderr, "RecStop()\n");
 	return 0;
 }
 
+
 void audioSetVolume(int vol) {
+	fprintf(stderr, "audioSetVolume(%d)\n", vol);
 }
 

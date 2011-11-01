@@ -16,6 +16,8 @@ void motorsInit();
 void motorsLoop();
 
 void motorsSetDirection(int num_motor, int dir);
+int motorsGetDirection(int num_motor);
+
 int motorsGetValue(int i);
 
 #endif

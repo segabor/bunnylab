@@ -31,18 +31,15 @@ void motorsInit() {
 
 
 void motorsLoop() {
-	int i;
+	int i, last;
 
 	for(i=0;i<NBMOTOR;i++)
 	{
-		motorval[i]=60;//(rand()&255)*MAXMOTORVAL/256;
-		motorcount[i]=motordir[i]=0; 
-	}
-	for(i=0;i<256;i++) motorwheel[i]=0;
-	for(i=0;i<MAXMOTORVAL;i++)
-	{
-		if ((i*2*NBHOLES/MAXMOTORVAL)&1) motorwheel[i]=1;
-		if (i*NBHOLES/MAXMOTORVAL>=NBHOLES-MASKEDHOLES) motorwheel[i]=1;
+		last=motorwheel[motorval[i]];
+		if (1) motorval[i]+=motordir[i];
+		if (motorval[i]<0) motorval[i]+=MAXMOTORVAL;
+		if (motorval[i]>=MAXMOTORVAL) motorval[i]-=MAXMOTORVAL;
+		if (last<motorwheel[motorval[i]]) motorcount[i]++;
 	}
 }
 
@@ -59,6 +56,12 @@ void motorsSetDirection(int num_motor, int dir)
 
 	// my_printf(LOG_SIMUMOTORS, "Setting motor %d, direction %d (pos: %d)\n", tmp_num, tmp_dir);
 }
+
+
+int motorsGetDirection(int num_motor) {
+	return motordir[num_motor];
+}
+
 
 int motorsGetValue(int i)
 {
