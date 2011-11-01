@@ -1,7 +1,14 @@
-var BunnylabType = Class.create();
-BunnylabType.addMethods({
-	init: function() {
-		window.setTimeout(function() {
+var BUNNYLAB = (function () {
+	var my = {},
+		privateVariable = 1;
+	
+	function privateMethod() {
+		// ...
+	}
+	
+	// public section
+	my.init = function() {
+		window.setInterval(function() {
 			var a = new Ajax.Request('/api/events', {
 				method: 'get',
 				onSuccess: function(transport) {
@@ -9,6 +16,6 @@ BunnylabType.addMethods({
 			});
 		}, 1000);
 	}
-});
-
-$bunnylab = new BunnylabType();
+	
+	return my;
+}());

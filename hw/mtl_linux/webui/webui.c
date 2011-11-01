@@ -2,6 +2,13 @@
 
 #include "mongoose.h"
 
+#include "motor_simu.h"
+
+static const char *ajax_reply_start =
+  "HTTP/1.1 200 OK\r\n"
+  "Cache: no-cache\r\n"
+  "Content-Type: application/x-json\r\n"
+  "\r\n";
 
 /**
  * Handles request came from web client
@@ -10,6 +17,16 @@ void *handleWebRequest(enum mg_event event, struct mg_connection *conn, const st
 {
 	// do something, get some info from bunny
 	if (event == MG_NEW_REQUEST) {
+		// API calls
+		if (!strcmp("/api/events", request_info->uri)) {
+		  mg_printf(conn, "%s", ajax_reply_start);
+
+			mg_printf(conn, "motors:[{dir: %d, value: %d}, {dir: %d, value: %d} ]\r\n",
+				motorsGetDirection(0), motorsGetValue(0), motorsGetDirection(1), motorsGetValue(1) );
+
+			return "";
+		}
+		
 		if (!strncmp("/lib/", request_info->uri, 5)) {
 			// Let files put in lib handle by Mongoose
 			return NULL;
