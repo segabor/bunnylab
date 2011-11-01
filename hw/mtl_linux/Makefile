@@ -23,14 +23,14 @@ COMMON_OBJS=properties.o dumpbc.o log.o
 
 COMP_OBJS=main_compiler.o
 
-SIMU_SRC=main_simu.c $(PLATF_SIMU_SRC) vmem.c vloader.c vlog.c vinterp.c vaudio.c vnet.c webui/webui_simu.c webui/webui.c
+SIMU_SRC=main_simu.c $(PLATF_SIMU_SRC) vmem.c vloader.c vlog.c vinterp.c vaudio.c vnet.c motor_simu.c webui/webui_simu.c webui/webui.c
 SIMU_OBJS=$(SIMU_SRC:.c=.o)
 
 MONGOOSE_SRC=mongoose/mongoose.c
 MONGOOSE_OBJS=$(MONGOOSE_SRC:.c=.o)
 
-CXXFLAGS=-DVSIMU -DWEBUI -DWEBROOT=$(DOCROOT) -g3 -m32 -Imongoose
-CFLAGS=-DVSIMU -DWEBUI -DWEBROOT=$(DOCROOT) -g3 -m32 -Imongoose
+CXXFLAGS=-DVSIMU -DWEBUI -DWEBROOT=$(DOCROOT) -g3 -m32 -I. -Imongoose
+CFLAGS=-DVSIMU -DWEBUI -DWEBROOT=$(DOCROOT) -g3 -m32 -I. -Imongoose
 
 CC=gcc
 CXX=g++
