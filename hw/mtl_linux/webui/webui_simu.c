@@ -6,7 +6,7 @@
 
 #include "motor_simu.h"
 
-// linux_simunet.c
+// Functions defined in linux_simunet.c
 extern void checkAllEvents(void);
 extern int checkNetworkEvents(void);
 
@@ -96,7 +96,7 @@ int get_button3() {
 // char buf_rfid[256];
 // FIXME
 char* get_rfid() {
-	fprintf(stderr, "get_rfid()\n");
+	// fprintf(stderr, "get_rfid()\n");
 	return 0;
 }
 

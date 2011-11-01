@@ -9,7 +9,7 @@ var BUNNYLAB = (function () {
 	// public section
 	my.init = function() {
 		window.setInterval(function() {
-			var a = new Ajax.Request('/api/events', {
+			var a = new Ajax.Request('/api/status', {
 				method: 'get',
 				onSuccess: function(transport) {
 				}

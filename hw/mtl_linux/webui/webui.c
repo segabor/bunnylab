@@ -18,11 +18,16 @@ void *handleWebRequest(enum mg_event event, struct mg_connection *conn, const st
 	// do something, get some info from bunny
 	if (event == MG_NEW_REQUEST) {
 		// API calls
-		if (!strcmp("/api/events", request_info->uri)) {
+		if (!strcmp("/api/status", request_info->uri)) {
 		  mg_printf(conn, "%s", ajax_reply_start);
 
-			mg_printf(conn, "motors:[{dir: %d, value: %d}, {dir: %d, value: %d} ]\r\n",
-				motorsGetDirection(0), motorsGetValue(0), motorsGetDirection(1), motorsGetValue(1) );
+			// Ear motors
+			mg_printf(conn, "{\r\n"
+				"  \"motors\":{"
+				"    \"values\":[{\"dir\": %d, \"value\": %d}, {\"dir\": %d, \"value:\" %d} ], \"max\": %d "
+				"  }\r\n"
+				"}\r\n",
+				motorsGetDirection(0), motorsGetValue(0), motorsGetDirection(1), motorsGetValue(1), MAXMOTORVAL );
 
 			return "";
 		}
