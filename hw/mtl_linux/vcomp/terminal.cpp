@@ -33,7 +33,7 @@ Terminal::~Terminal()
 }
 
 
-void Terminal::echo(int msk,char *s)
+void Terminal::echo(int msk, const char *s)
 {
 	if (s)
 	{
@@ -42,7 +42,7 @@ void Terminal::echo(int msk,char *s)
 	}
 }
 
-void Terminal::echo(int msk,char* s,int size)
+void Terminal::echo(int msk, const char* s,int size)
 {
 	if (size+1>sizeinternalbuffer)
 	{
@@ -55,7 +55,7 @@ void Terminal::echo(int msk,char* s,int size)
 	echo(msk,internalbuffer);
 }
 
-void Terminal::printf(int msk,char *format, ...)
+void Terminal::printf(int msk, const char *format, ...)
 {
 	va_list arglist;
 	int sizeout;

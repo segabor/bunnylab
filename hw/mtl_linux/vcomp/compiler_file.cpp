@@ -135,7 +135,7 @@ int Compiler::gocompile(int type)
 	else
 	{
 		parser=new Parser(m->term,name);
-		name="...";
+		name=(char *)"...";
 		PRINTF(m)(LOG_COMPILER,"Compiler : compiling string buffer\n");
 	}
 

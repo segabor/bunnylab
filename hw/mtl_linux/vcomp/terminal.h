@@ -22,9 +22,9 @@ public:
 	Terminal();
 	~Terminal();
 
-	void echo(int mask,char *s);
-	void echo(int mask,char *s,int size);
-	void printf(int mask,char *format, ...);
+	void echo(int mask, const char *s);
+	void echo(int mask, const char *s,int size);
+	void printf(int mask, const char *format, ...);
 };
 
 #endif

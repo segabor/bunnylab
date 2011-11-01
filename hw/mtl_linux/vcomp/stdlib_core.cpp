@@ -26,7 +26,7 @@
 
 // types de base
 #define NBcore 115 /******** A ACTUALISER! ************/
-char* corename[]=
+const char* corename[]=
 {NULL,NULL,NULL,NULL,NULL,"hd","tl","Secholn","Secho","Iecholn",					//10
 "Iecho","time_ms","tabnew","abs","min","max","rand","srand",					//8
 "time","strnew","strset","strcpy","vstrcmp","strfind","strfindrev","strlen",		//8
@@ -46,7 +46,7 @@ char* corename[]=
 
 
 
-int coreval[]=
+const int coreval[]=
 {0,0,0,0,0,OPhd,OPtl,OPSecholn,OPSecho,OPIecholn,
 OPIecho,OPtime_ms,OPtabnew,OPabs,OPmin,OPmax,OPrand,OPsrand,
 OPtime,OPstrnew,OPstrset,OPstrcpy,OPvstrcmp,OPstrfind,OPstrfindrev,OPstrlen,
@@ -64,7 +64,7 @@ OPcrypt,OPuncrypt,OPrfidGetList,OPrfidRead,OPrfidWrite,
 OPi2cRead, OPi2cWrite
 };
 
-int corecode[]=
+const int corecode[]=
 {CODE_TYPE,CODE_TYPE,CODE_TYPE,CODE_TYPE,CODE_TYPE,1,1,1,1,1,
 1,0,2,1,2,2,0,1,
 0,1,3,5,5,5,5,1,
@@ -82,7 +82,7 @@ int corecode[]=
 2,3
 };
 
-char* coretype[]=
+const char* coretype[]=
 {"I","S","F","Env","Xml","fun[list u0]u0","fun[list u0]list u0","fun[S]S","fun[S]S","fun[u0]u0",
 "fun[u0]u0","fun[]I","fun[u0 I]tab u0","fun[I]I","fun[I I]I","fun[I I]I","fun[]I","fun[I]I",
 "fun[]I","fun[I]S","fun[S I I]S","fun[S I S I I]S","fun[S I S I I]I","fun[S I S I I]I","fun[S I S I I]I","fun[S]I",

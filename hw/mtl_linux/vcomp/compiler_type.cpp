@@ -18,7 +18,7 @@
 // types
 
 // création d'un noeud de type basique (éventuellement paramétrique)
-int Compiler::createnodetypecore(char* name)
+int Compiler::createnodetypecore(const char* name)
 {
 	int k;
 
@@ -34,7 +34,7 @@ int Compiler::createnodetypecore(char* name)
 }
 
 // création d'un noeud de type basique (éventuellement paramétrique)
-int Compiler::createnodetypecore(int name)
+int Compiler::createnodetypecore(const int name)
 {
 	int* p=MALLOCCLEAR(m,TYPEHEADER_LENGTH+2);
 	if (!p) return MTLERR_OM;
@@ -329,11 +329,11 @@ int Compiler::creategraph(Parser* p,int env,int mono,int labels)
 
 
 // création d'un graphe de type à partir d'une chaîne
-int Compiler::creategraph(char* src,int env,int mono)
+int Compiler::creategraph(const char* src,int env,int mono)
 {
 //	PRINTF(m)(LOG_DEVCORE,"Compiler : creategraph : %s\n",src);
 
-	Parser* p=new Parser(m->term,src);
+	Parser* p=new Parser(m->term, src);
 	int k=creategraph(p,env,mono);
 	delete p;
 	return k;

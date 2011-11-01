@@ -30,7 +30,7 @@ Stack::~Stack()
 
 void Stack::dump(FILE *f)
 {
-	char* buf="stck";
+	const char* buf="stck";
 	fwrite((void*)buf,1,4,f);
 	fwrite((void*)&size,1,4,f);
 	fwrite((void*)&pp,1,4,f);
@@ -200,7 +200,7 @@ int* Memory::storenosrc(int size)
 	return p;
 }
 
-int* Memory::storebinary(char *src,int size)
+int* Memory::storebinary(const char *src,int size)
 {
 	// calcul de la taille d'un bloc pouvant contenir une certain nombre de caractères
 	// il faut 1 mot pour la taille et un octet nul final
@@ -214,7 +214,7 @@ int* Memory::storebinary(char *src,int size)
 	return p;
 }
 
-int* Memory::storestring(char *src)
+int* Memory::storestring(const char *src)
 {
 	return storebinary(src,strlen(src));
 }
@@ -227,7 +227,7 @@ int Memory::deftab(int size)
 	return push(PNTTOVAL(p));
 }
 
-char* Memory::errorname(int err)
+const char* Memory::errorname(int err)
 {
 	if (err==MTLERR_OM) return "Out of memory";
 	else if (err==MTLERR_OP) return "Unknown Operand";
